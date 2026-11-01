@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boda Betania y Cristian</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  /* Layout: la invitación ilustrada como lienzo fijo (683×1024) con los números del reloj en vivo encima; mensaje en tarjeta de papel debajo. Una sola apariencia, sepia. */
+  :root {
+    --ground: #2b2218;
+    --paper: #f3e6d6;
+    --paper-edge: #ead8c4;
+    --ink: #3a2a1c;
+    --ink-soft: #6e573d;
+    --line: #c9b394;
+    --display: "IM Fell English SC", "Cormorant Garamond", Georgia, serif;
+    --body: "IM Fell English", "Cormorant Garamond", Georgia, serif;
+    color-scheme: light;
+  }
+  body {
+    margin: 0;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(212,194,165,0.16), transparent 60%),
+      var(--ground);
+    color: var(--ink);
+    font-family: var(--body);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding-block: 24px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    box-sizing: border-box;
+  }
+  .wrap { width: 100%; max-width: 600px; display: flex; flex-direction: column; gap: 20px; }
+
+  .invite {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 683 / 1024;
+    max-width: 100%;
+    container-type: inline-size;
+    flex-shrink: 0;
+    height: auto;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.55);
+    overflow: hidden;
+  }
+  .invite > img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+
+  /* Fichas tipo reloj de tableta sobre cada esfera */
+  .tiles {
+    position: absolute;
+    top: calc(331 / 1024 * 100%);
+    height: calc(48 / 1024 * 100%);
+    display: flex; gap: 0.5cqw; justify-content: center; align-items: stretch;
+  }
+  .t1 { left: calc(131 / 683 * 100%); width: calc(96 / 683 * 100%); }
+  .t2 { left: calc(259 / 683 * 100%); width: calc(64 / 683 * 100%); }
+  .t3 { left: calc(371 / 683 * 100%); width: calc(66 / 683 * 100%); }
+  .t4 { left: calc(483 / 683 * 100%); width: calc(66 / 683 * 100%); }
+  .d {
+    flex: 1;
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(#f5ead8 0 49%, #e7d6bd 51% 100%);
+    border: 0.3cqw solid #5a4430;
+    border-radius: 0.6cqw;
+    box-shadow: inset 0 0 0.8cqw rgba(90,68,48,0.35), 0 0.3cqw 0.6cqw rgba(40,28,18,0.45);
+    font-family: var(--display);
+    font-size: 5.6cqw;
+    line-height: 1;
+    color: #2e2116;
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+  .d::after {
+    content: ""; position: absolute; left: 0; right: 0; top: 50%;
+    height: 0.2cqw; background: rgba(70,52,36,0.55);
+  }
+
+  /* Banda que reemplaza las etiquetas de la imagen */
+  .labels {
+    position: absolute;
+    left: calc(112 / 683 * 100%);
+    width: calc(474 / 683 * 100%);
+    top: calc(418 / 1024 * 100%);
+    height: calc(64 / 1024 * 100%);
+    background: var(--paper-edge);
+    box-shadow: 0 0 1.4cqw 1.2cqw var(--paper-edge);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    align-items: center;
+    text-align: center;
+    font-family: var(--display);
+    font-size: 4cqw;
+    color: var(--ink);
+  }
+
+  .msg {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 26px 24px;
+    box-shadow: 0 14px 30px rgba(0,0,0,0.45);
+    text-align: center;
+  }
+  .msg p {
+    margin: 0;
+    font-style: italic;
+    font-size: 1.15rem;
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+  .orn { display: flex; justify-content: center; align-items: center; gap: 10px; color: var(--ink-soft); margin-bottom: 14px; }
+  .orn span { height: 1px; width: 44px; background: var(--line); }
+  .orn svg { width: 13px; height: 13px; }
+  .arrived { margin-top: 14px !important; font-style: normal !important; font-family: var(--display); font-size: 1.35rem !important; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="invite" role="img" aria-label="Invitación de casamiento con cuenta regresiva: sábado 30 de enero de 2027, Salón Municipal de Sinsacate">
+    <img src="invitacion.jpg" alt="">
+    <div class="tiles t1"><span class="d" id="d0">0</span><span class="d" id="d1">0</span><span class="d" id="d2">0</span></div>
+    <div class="tiles t2"><span class="d" id="h0">0</span><span class="d" id="h1">0</span></div>
+    <div class="tiles t3"><span class="d" id="m0">0</span><span class="d" id="m1">0</span></div>
+    <div class="tiles t4"><span class="d" id="s0">0</span><span class="d" id="s1">0</span></div>
+    <div class="labels" aria-hidden="true"><span>Días</span><span>Horas</span><span>Minutos</span><span>Segundos</span></div>
+  </div>
+
+  <section class="msg">
+    <div class="orn" aria-hidden="true">
+      <span></span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.5 8.1 3.4 4.5 7 4.5c2.1 0 3.6 1.2 5 3 1.4-1.8 2.9-3 5-3 3.6 0 5.5 3.6 4.3 6.8-1.8 4.6-9.3 9.2-9.3 9.2z"/></svg>
+      <span></span>
+    </div>
+    <p>"Este reloj te va diciendo cuánto falta para nuestra boda, y la posibilidad de juntarnos a disfrutar y celebrar la vida, la amistad y el amor!!! Esperamos contar con tu presencia, y recordá que tenés la posibilidad de ir pagando tu tarjeta, en pequeñas cuotas, para que puedas compartir con nosotros de esa hermosa noche."</p>
+    <p class="arrived" id="arrived" hidden>¡Llegó el gran día!</p>
+  </section>
+</div>
+
+<script>
+  // 30/01/2027 19:00 hora de Argentina (UTC-3) = 22:00 UTC
+  const target = Date.UTC(2027, 0, 30, 22, 0, 0);
+  const set = (ids, n) => {
+    const s = String(n).padStart(ids.length, '0').slice(-ids.length);
+    ids.forEach((id, i) => { const e = document.getElementById(id); if (e.textContent !== s[i]) e.textContent = s[i]; });
+  };
+  let timer;
+  function tick() {
+    let diff = Math.max(0, Math.floor((target - Date.now()) / 1000));
+    set(['d0','d1','d2'], Math.floor(diff / 86400));
+    set(['h0','h1'], Math.floor(diff % 86400 / 3600));
+    set(['m0','m1'], Math.floor(diff % 3600 / 60));
+    set(['s0','s1'], diff % 60);
+    if (diff === 0) { document.getElementById('arrived').hidden = false; clearInterval(timer); }
+  }
+  tick();
+  timer = setInterval(tick, 1000);
+</script>
+</body>
+</html>
