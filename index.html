@@ -118,43 +118,27 @@
   .orn svg { width: 13px; height: 13px; }
   .arrived { margin-top: 14px !important; font-style: normal !important; font-family: var(--display); font-size: 1.35rem !important; }
 
-  /* Carrusel: foto de papel inclinada, apoyada sobre el borde superior de la invitación */
-  .wrap { container-type: inline-size; }
-  .album {
-    position: relative; z-index: 2;
-    align-self: center;
-    width: 84%;
+  /* Carrusel chico dentro de la invitación, en el espacio entre el borde superior y el título */
+  .mini {
+    position: absolute; z-index: 2;
+    left: calc(214 / 683 * 100%);
+    width: calc(255 / 683 * 100%);
+    top: calc(34 / 1024 * 100%);
+    height: calc(136 / 1024 * 100%);
+    padding: 0.7cqw;
     box-sizing: border-box;
-    margin-bottom: calc(-22cqw - 20px); /* se superpone a la parte de arriba de la invitación, sin tapar el título */
-    background: #fbf5ec;
-    padding: 10px 10px 8px;
-    box-shadow: 0 12px 26px rgba(0,0,0,0.5), 0 2px 4px rgba(0,0,0,0.3);
-    rotate: -2.5deg;
-    display: flex; flex-direction: column; gap: 8px;
+    background: #f7ecdd;
+    border: 0.25cqw solid #8a7055;
+    box-shadow: 0 0.4cqw 1.2cqw rgba(60,42,28,0.35);
   }
-  .album::before, .album::after {
-    content: ""; position: absolute; top: -12px;
-    width: 86px; height: 26px;
-    background: rgba(214, 196, 168, 0.78);
-    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
-  }
-  .album::before { left: -18px; rotate: -38deg; }
-  .album::after { right: -18px; rotate: 38deg; }
-  .album h2 {
-    margin: 0 0 2px; text-align: center;
-    font-family: var(--display); font-weight: 400;
-    font-size: clamp(1.1rem, 4.4cqw, 1.6rem); color: var(--ink); letter-spacing: 0.02em;
-  }
-  .viewer { position: relative; }
   .track {
     display: flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
-    aspect-ratio: 4 / 3.2;
-    max-width: 100%;
+    height: 100%;
     background: #241b12;
-    border: 1px solid #cdbca3;
+    border: 0;
   }
   .track::-webkit-scrollbar { display: none; }
   .slide {
@@ -177,61 +161,59 @@
   }
   .nav {
     position: absolute; top: 50%; translate: 0 -50%;
-    width: 40px; height: 40px; border-radius: 50%;
+    width: 5cqw; height: 5cqw; border-radius: 50%;
     border: 1px solid var(--line);
     background: rgba(243,230,214,0.88);
     color: var(--ink);
     display: grid; place-items: center;
     cursor: pointer;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.35);
+    box-shadow: 0 0.3cqw 0.8cqw rgba(0,0,0,0.35);
   }
   .nav:hover { background: var(--paper); }
   .nav:focus-visible, .dots button:focus-visible { outline: 2px solid var(--ink-soft); outline-offset: 2px; }
-  .nav svg { width: 18px; height: 18px; }
-  .prev { left: 10px; }
-  .next { right: 10px; }
+  .nav svg { width: 2.6cqw; height: 2.6cqw; }
+  .prev { left: 1.4cqw; }
+  .next { right: 1.4cqw; }
   .dots { display: flex; justify-content: center; flex-wrap: wrap; gap: 6px; }
   .dots button {
     width: 7px; height: 7px; padding: 0; border-radius: 50%;
     border: 1px solid var(--ink-soft); background: transparent; cursor: pointer;
   }
   .dots button[aria-current="true"] { background: var(--ink-soft); }
+  [hidden] { display: none !important; }
 </style>
 </head>
 <body>
 
 <div class="wrap">
-  <section class="album" aria-roledescription="carrusel" aria-label="Fotos de Betania y Cristian">
-    <div class="viewer">
-      <div class="track" id="track" tabindex="0">
-      <div class="slide" role="group" aria-roledescription="foto" aria-label="Foto 1 de 15"><img class="bg" src="fotos/01.jpg" alt="" decoding="async"><img class="fg" src="fotos/01.jpg" alt="Betania y Cristian, foto 1" decoding="async"></div>
-      <div class="slide" role="group" aria-roledescription="foto" aria-label="Foto 2 de 15"><img class="bg" src="fotos/02.jpg" alt="" loading="lazy" decoding="async"><img class="fg" src="fotos/02.jpg" alt="Betania y Cristian, foto 2" loading="lazy" decoding="async"></div>
-      <div class="slide" role="group" aria-roledescription="foto" aria-label="Foto 3 de 15"><img class="bg" src="fotos/03.jpg" alt="" loading="lazy" decoding="async"><img class="fg" src="fotos/03.jpg" alt="Betania y Cristian, foto 3" loading="lazy" decoding="async"></div>
-      <div class="slide" role="group" aria-roledescription="foto" aria-label="Foto 4 de 15"><img class="bg" src="fotos/04.jpg" alt="" loading="lazy" decoding="async"><img class="fg" src="fotos/04.jpg" alt="Betania y Cristian, foto 4" loading="lazy" decoding="async"></div>
-      <div class="slide" role="group" aria-roledescription="foto" aria-label="Foto 5 de 15"><img class="bg" src="fotos/05.jpg" alt="" loading="lazy" decoding="async"><img class="fg" src="fotos/05.jpg" alt="Betania y Cristian, foto 5" loading="lazy" decoding="async"></div>
-      <div class="slide" role="group" aria-roledescription="foto" aria-label="Foto 6 de 15"><img class="bg" src="fotos/06.jpg" alt="" loading="lazy" decoding="async"><img class="fg" src="fotos/06.jpg" alt="Betania y Cristian, foto 6" loading="lazy" decoding="async"></div>
-      <div class="slide" role="group" aria-roledescription="foto" aria-label="Foto 7 de 15"><img class="bg" src="fotos/07.jpg" alt="" loading="lazy" decoding="async"><img class="fg" src="fotos/07.jpg" alt="Betania y Cristian, foto 7" loading="lazy" decoding="async"></div>
-      <div class="slide" role="group" aria-roledescription="foto" aria-label="Foto 8 de 15"><img class="bg" src="fotos/08.jpg" alt="" loading="lazy" decoding="async"><img class="fg" src="fotos/08.jpg" alt="Betania y Cristian, foto 8" loading="lazy" decoding="async"></div>
-      <div class="slide" role="group" aria-roledescription="foto" aria-label="Foto 9 de 15"><img class="bg" src="fotos/09.jpg" alt="" loading="lazy" decoding="async"><img class="fg" src="fotos/09.jpg" alt="Betania y Cristian, foto 9" loading="lazy" decoding="async"></div>
-      <div class="slide" role="group" aria-roledescription="foto" aria-label="Foto 10 de 15"><img class="bg" src="fotos/10.jpg" alt="" loading="lazy" decoding="async"><img class="fg" src="fotos/10.jpg" alt="Betania y Cristian, foto 10" loading="lazy" decoding="async"></div>
-      <div class="slide" role="group" aria-roledescription="foto" aria-label="Foto 11 de 15"><img class="bg" src="fotos/11.jpg" alt="" loading="lazy" decoding="async"><img class="fg" src="fotos/11.jpg" alt="Betania y Cristian, foto 11" loading="lazy" decoding="async"></div>
-      <div class="slide" role="group" aria-roledescription="foto" aria-label="Foto 12 de 15"><img class="bg" src="fotos/12.jpg" alt="" loading="lazy" decoding="async"><img class="fg" src="fotos/12.jpg" alt="Betania y Cristian, foto 12" loading="lazy" decoding="async"></div>
-      <div class="slide" role="group" aria-roledescription="foto" aria-label="Foto 13 de 15"><img class="bg" src="fotos/13.jpg" alt="" loading="lazy" decoding="async"><img class="fg" src="fotos/13.jpg" alt="Betania y Cristian, foto 13" loading="lazy" decoding="async"></div>
-      <div class="slide" role="group" aria-roledescription="foto" aria-label="Foto 14 de 15"><img class="bg" src="fotos/14.jpg" alt="" loading="lazy" decoding="async"><img class="fg" src="fotos/14.jpg" alt="Betania y Cristian, foto 14" loading="lazy" decoding="async"></div>
-      <div class="slide" role="group" aria-roledescription="foto" aria-label="Foto 15 de 15"><img class="bg" src="fotos/15.jpg" alt="" loading="lazy" decoding="async"><img class="fg" src="fotos/15.jpg" alt="Betania y Cristian, foto 15" loading="lazy" decoding="async"></div>
-      </div>
-      <button class="nav prev" id="prev" type="button" aria-label="Foto anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 5l-7 7 7 7"/></svg></button>
-      <button class="nav next" id="next" type="button" aria-label="Foto siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg></button>
-    </div>
-    <div class="dots" id="dots"></div>
-    <h2>Betania &amp; Cristian</h2>
-  </section>
-  <div class="invite" role="img" aria-label="Invitación de casamiento con cuenta regresiva: sábado 30 de enero de 2027, Salón Municipal de Sinsacate">
+  <div class="invite" aria-label="Invitación de casamiento con cuenta regresiva: sábado 30 de enero de 2027, Salón Municipal de Sinsacate">
     <img src="invitacion.jpg" alt="">
     <div class="tiles t1"><span class="d" id="d0">0</span><span class="d" id="d1">0</span><span class="d" id="d2">0</span></div>
     <div class="tiles t2"><span class="d" id="h0">0</span><span class="d" id="h1">0</span></div>
     <div class="tiles t3"><span class="d" id="m0">0</span><span class="d" id="m1">0</span></div>
     <div class="tiles t4"><span class="d" id="s0">0</span><span class="d" id="s1">0</span></div>
+    <div class="mini" role="region" aria-roledescription="carrusel" aria-label="Fotos de Betania y Cristian">
+      <div class="track" id="track" tabindex="0">
+    <div class="slide" role="group" aria-roledescription="foto" aria-label="Foto 1 de 15"><img class="bg" src="fotos/01.jpg" alt="" decoding="async"><img class="fg" src="fotos/01.jpg" alt="Betania y Cristian, foto 1" decoding="async"></div>
+    <div class="slide" role="group" aria-roledescription="foto" aria-label="Foto 2 de 15"><img class="bg" src="fotos/02.jpg" alt="" loading="lazy" decoding="async"><img class="fg" src="fotos/02.jpg" alt="Betania y Cristian, foto 2" loading="lazy" decoding="async"></div>
+    <div class="slide" role="group" aria-roledescription="foto" aria-label="Foto 3 de 15"><img class="bg" src="fotos/03.jpg" alt="" loading="lazy" decoding="async"><img class="fg" src="fotos/03.jpg" alt="Betania y Cristian, foto 3" loading="lazy" decoding="async"></div>
+    <div class="slide" role="group" aria-roledescription="foto" aria-label="Foto 4 de 15"><img class="bg" src="fotos/04.jpg" alt="" loading="lazy" decoding="async"><img class="fg" src="fotos/04.jpg" alt="Betania y Cristian, foto 4" loading="lazy" decoding="async"></div>
+    <div class="slide" role="group" aria-roledescription="foto" aria-label="Foto 5 de 15"><img class="bg" src="fotos/05.jpg" alt="" loading="lazy" decoding="async"><img class="fg" src="fotos/05.jpg" alt="Betania y Cristian, foto 5" loading="lazy" decoding="async"></div>
+    <div class="slide" role="group" aria-roledescription="foto" aria-label="Foto 6 de 15"><img class="bg" src="fotos/06.jpg" alt="" loading="lazy" decoding="async"><img class="fg" src="fotos/06.jpg" alt="Betania y Cristian, foto 6" loading="lazy" decoding="async"></div>
+    <div class="slide" role="group" aria-roledescription="foto" aria-label="Foto 7 de 15"><img class="bg" src="fotos/07.jpg" alt="" loading="lazy" decoding="async"><img class="fg" src="fotos/07.jpg" alt="Betania y Cristian, foto 7" loading="lazy" decoding="async"></div>
+    <div class="slide" role="group" aria-roledescription="foto" aria-label="Foto 8 de 15"><img class="bg" src="fotos/08.jpg" alt="" loading="lazy" decoding="async"><img class="fg" src="fotos/08.jpg" alt="Betania y Cristian, foto 8" loading="lazy" decoding="async"></div>
+    <div class="slide" role="group" aria-roledescription="foto" aria-label="Foto 9 de 15"><img class="bg" src="fotos/09.jpg" alt="" loading="lazy" decoding="async"><img class="fg" src="fotos/09.jpg" alt="Betania y Cristian, foto 9" loading="lazy" decoding="async"></div>
+    <div class="slide" role="group" aria-roledescription="foto" aria-label="Foto 10 de 15"><img class="bg" src="fotos/10.jpg" alt="" loading="lazy" decoding="async"><img class="fg" src="fotos/10.jpg" alt="Betania y Cristian, foto 10" loading="lazy" decoding="async"></div>
+    <div class="slide" role="group" aria-roledescription="foto" aria-label="Foto 11 de 15"><img class="bg" src="fotos/11.jpg" alt="" loading="lazy" decoding="async"><img class="fg" src="fotos/11.jpg" alt="Betania y Cristian, foto 11" loading="lazy" decoding="async"></div>
+    <div class="slide" role="group" aria-roledescription="foto" aria-label="Foto 12 de 15"><img class="bg" src="fotos/12.jpg" alt="" loading="lazy" decoding="async"><img class="fg" src="fotos/12.jpg" alt="Betania y Cristian, foto 12" loading="lazy" decoding="async"></div>
+    <div class="slide" role="group" aria-roledescription="foto" aria-label="Foto 13 de 15"><img class="bg" src="fotos/13.jpg" alt="" loading="lazy" decoding="async"><img class="fg" src="fotos/13.jpg" alt="Betania y Cristian, foto 13" loading="lazy" decoding="async"></div>
+    <div class="slide" role="group" aria-roledescription="foto" aria-label="Foto 14 de 15"><img class="bg" src="fotos/14.jpg" alt="" loading="lazy" decoding="async"><img class="fg" src="fotos/14.jpg" alt="Betania y Cristian, foto 14" loading="lazy" decoding="async"></div>
+    <div class="slide" role="group" aria-roledescription="foto" aria-label="Foto 15 de 15"><img class="bg" src="fotos/15.jpg" alt="" loading="lazy" decoding="async"><img class="fg" src="fotos/15.jpg" alt="Betania y Cristian, foto 15" loading="lazy" decoding="async"></div>
+    </div>
+    <button class="nav prev" id="prev" type="button" aria-label="Foto anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <button class="nav next" id="next" type="button" aria-label="Foto siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg></button>
+    <div class="dots" id="dots" hidden></div>
+    </div>
     <div class="labels" aria-hidden="true"><span>Días</span><span>Horas</span><span>Minutos</span><span>Segundos</span></div>
   </div>
 
