@@ -67,7 +67,7 @@
     height: calc(48 / 1024 * 100%);
     display: flex; gap: 0.5cqw; justify-content: center; align-items: stretch;
   }
-  .t1 { left: calc(131 / 683 * 100%); width: calc(96 / 683 * 100%); }
+  .t1 { left: calc(147 / 683 * 100%); width: calc(64 / 683 * 100%); }
   .t2 { left: calc(259 / 683 * 100%); width: calc(64 / 683 * 100%); }
   .t3 { left: calc(371 / 683 * 100%); width: calc(66 / 683 * 100%); }
   .t4 { left: calc(483 / 683 * 100%); width: calc(66 / 683 * 100%); }
@@ -169,7 +169,7 @@
 <div class="wrap">
   <div class="invite" aria-label="Invitación de casamiento con cuenta regresiva: sábado 30 de enero de 2027, Salón Municipal de Sinsacate">
     <img src="invitacion.jpg?v=2" alt="">
-    <div class="tiles t1"><span class="d" id="d0">0</span><span class="d" id="d1">0</span><span class="d" id="d2">0</span></div>
+    <div class="tiles t1"><span class="d" id="d0">0</span><span class="d" id="d1">0</span></div>
     <div class="tiles t2"><span class="d" id="h0">0</span><span class="d" id="h1">0</span></div>
     <div class="tiles t3"><span class="d" id="m0">0</span><span class="d" id="m1">0</span></div>
     <div class="tiles t4"><span class="d" id="s0">0</span><span class="d" id="s1">0</span></div>
@@ -198,7 +198,7 @@
   let timer;
   function tick() {
     let diff = Math.max(0, Math.floor((target - Date.now()) / 1000));
-    set(['d0','d1','d2'], Math.floor(diff / 86400));
+    set(['d0','d1'], Math.min(99, Math.floor(diff / 86400)));
     set(['h0','h1'], Math.floor(diff % 86400 / 3600));
     set(['m0','m1'], Math.floor(diff % 3600 / 60));
     set(['s0','s1'], diff % 60);
