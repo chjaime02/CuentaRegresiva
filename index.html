@@ -112,13 +112,13 @@
   /* Tres fotos dentro de la invitación, en el espacio entre el borde superior y el título */
   .mini {
     position: absolute; z-index: 2;
-    left: calc(140 / 683 * 100%);
-    width: calc(403 / 683 * 100%);
+    left: calc(132 / 683 * 100%);
+    width: calc(419 / 683 * 100%);
     top: calc(58 / 1024 * 100%);
     height: calc(114 / 1024 * 100%);
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.6cqw;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.3cqw;
   }
   .cell {
     position: relative;
@@ -129,8 +129,10 @@
     box-shadow: 0 0.4cqw 1cqw rgba(60,42,28,0.35);
     transition: opacity 0.6s ease;
   }
-  .cell:nth-child(1) { rotate: -2deg; }
-  .cell:nth-child(3) { rotate: 2deg; }
+  .cell:nth-child(1) { rotate: -2.5deg; }
+  .cell:nth-child(2) { rotate: 1deg; }
+  .cell:nth-child(3) { rotate: -1deg; }
+  .cell:nth-child(4) { rotate: 2.5deg; }
   .cell img { position: absolute; display: block; }
   .cell .bg {
     inset: -10px; width: calc(100% + 20px); height: calc(100% + 20px);
@@ -172,6 +174,7 @@
     <div class="tiles t3"><span class="d" id="m0">0</span><span class="d" id="m1">0</span></div>
     <div class="tiles t4"><span class="d" id="s0">0</span><span class="d" id="s1">0</span></div>
     <div class="mini" role="region" aria-label="Fotos de Betania y Cristian">
+      <div class="cell"><img class="bg" alt=""><img class="fg" alt="Betania y Cristian"></div>
       <div class="cell"><img class="bg" alt=""><img class="fg" alt="Betania y Cristian"></div>
       <div class="cell"><img class="bg" alt=""><img class="fg" alt="Betania y Cristian"></div>
       <div class="cell"><img class="bg" alt=""><img class="fg" alt="Betania y Cristian"></div>
@@ -225,7 +228,7 @@
     cells.forEach((_, c) => put(c, pick()));
     let turn = 0;
     setInterval(() => {
-      const c = [0, 2, 1][turn++ % 3];
+      const c = [0, 2, 1, 3][turn++ % 4];
       const src = pick();
       cells[c].classList.add('out');
       setTimeout(() => { put(c, src); cells[c].classList.remove('out'); }, reduce ? 0 : 600);
