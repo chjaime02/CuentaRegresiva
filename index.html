@@ -209,7 +209,7 @@
 
   // Tres fotos que van cambiando de a una, al azar y sin repetir las que están a la vista
   (() => {
-    const TOTAL_FOTOS = 55;
+    const TOTAL_FOTOS = 74;
     const fotos = Array.from({ length: TOTAL_FOTOS }, (_, i) => 'fotos/' + String(i + 1).padStart(2, '0') + '.jpg');
     const preload = src => { const im = new Image(); im.src = src; return im; };
     const cells = [...document.querySelectorAll('.mini .cell')];
