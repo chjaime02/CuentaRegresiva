@@ -118,69 +118,35 @@
   .orn svg { width: 13px; height: 13px; }
   .arrived { margin-top: 14px !important; font-style: normal !important; font-family: var(--display); font-size: 1.35rem !important; }
 
-  /* Carrusel chico dentro de la invitación, en el espacio entre el borde superior y el título */
+  /* Tres fotos dentro de la invitación, en el espacio entre el borde superior y el título */
   .mini {
     position: absolute; z-index: 2;
-    left: calc(214 / 683 * 100%);
-    width: calc(255 / 683 * 100%);
-    top: calc(34 / 1024 * 100%);
-    height: calc(136 / 1024 * 100%);
-    padding: 0.7cqw;
-    box-sizing: border-box;
-    background: #f7ecdd;
-    border: 0.25cqw solid #8a7055;
-    box-shadow: 0 0.4cqw 1.2cqw rgba(60,42,28,0.35);
+    left: calc(140 / 683 * 100%);
+    width: calc(403 / 683 * 100%);
+    top: calc(58 / 1024 * 100%);
+    height: calc(114 / 1024 * 100%);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.6cqw;
   }
-  .track {
-    display: flex;
-    overflow: hidden;
-    scroll-snap-type: x mandatory;
-    transition: opacity 0.5s ease;
-    scrollbar-width: none;
-    height: 100%;
-    background: #241b12;
-    border: 0;
-  }
-  .track::-webkit-scrollbar { display: none; }
-  .slide {
-    flex: 0 0 100%;
-    scroll-snap-align: center;
+  .cell {
     position: relative;
     overflow: hidden;
+    background: #241b12;
+    border: 0.7cqw solid #f7ecdd;
+    outline: 0.2cqw solid #8a7055;
+    box-shadow: 0 0.4cqw 1cqw rgba(60,42,28,0.35);
+    transition: opacity 0.6s ease;
   }
-  .slide .bg {
-    position: absolute; inset: -20px;
-    width: calc(100% + 40px); height: calc(100% + 40px);
-    object-fit: cover;
-    filter: blur(18px) sepia(0.45) brightness(0.6);
+  .cell:nth-child(1) { rotate: -2deg; }
+  .cell:nth-child(3) { rotate: 2deg; }
+  .cell img { position: absolute; display: block; }
+  .cell .bg {
+    inset: -10px; width: calc(100% + 20px); height: calc(100% + 20px);
+    object-fit: cover; filter: blur(10px) sepia(0.45) brightness(0.6);
   }
-  .slide .fg {
-    position: absolute; inset: 0;
-    width: 100%; height: 100%;
-    object-fit: contain;
-    filter: sepia(0.12);
-  }
-  .nav {
-    position: absolute; top: 50%; translate: 0 -50%;
-    width: 5cqw; height: 5cqw; border-radius: 50%;
-    border: 1px solid var(--line);
-    background: rgba(243,230,214,0.88);
-    color: var(--ink);
-    display: grid; place-items: center;
-    cursor: pointer;
-    box-shadow: 0 0.3cqw 0.8cqw rgba(0,0,0,0.35);
-  }
-  .nav:hover { background: var(--paper); }
-  .nav:focus-visible, .dots button:focus-visible { outline: 2px solid var(--ink-soft); outline-offset: 2px; }
-  .nav svg { width: 2.6cqw; height: 2.6cqw; }
-  .prev { left: 1.4cqw; }
-  .next { right: 1.4cqw; }
-  .dots { display: flex; justify-content: center; flex-wrap: wrap; gap: 6px; }
-  .dots button {
-    width: 7px; height: 7px; padding: 0; border-radius: 50%;
-    border: 1px solid var(--ink-soft); background: transparent; cursor: pointer;
-  }
-  .dots button[aria-current="true"] { background: var(--ink-soft); }
+  .cell .fg { inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; filter: sepia(0.12); }
+  .cell.out { opacity: 0; }
   [hidden] { display: none !important; }
 </style>
 </head>
@@ -193,25 +159,10 @@
     <div class="tiles t2"><span class="d" id="h0">0</span><span class="d" id="h1">0</span></div>
     <div class="tiles t3"><span class="d" id="m0">0</span><span class="d" id="m1">0</span></div>
     <div class="tiles t4"><span class="d" id="s0">0</span><span class="d" id="s1">0</span></div>
-    <div class="mini" role="region" aria-roledescription="carrusel" aria-label="Fotos de Betania y Cristian">
-      <div class="track" id="track">
-    <div class="slide" role="group" aria-roledescription="foto" aria-label="Foto 1 de 15"><img class="bg" src="fotos/01.jpg" alt="" decoding="async"><img class="fg" src="fotos/01.jpg" alt="Betania y Cristian, foto 1" decoding="async"></div>
-    <div class="slide" role="group" aria-roledescription="foto" aria-label="Foto 2 de 15"><img class="bg" src="fotos/02.jpg" alt="" decoding="async"><img class="fg" src="fotos/02.jpg" alt="Betania y Cristian, foto 2" decoding="async"></div>
-    <div class="slide" role="group" aria-roledescription="foto" aria-label="Foto 3 de 15"><img class="bg" src="fotos/03.jpg" alt="" decoding="async"><img class="fg" src="fotos/03.jpg" alt="Betania y Cristian, foto 3" decoding="async"></div>
-    <div class="slide" role="group" aria-roledescription="foto" aria-label="Foto 4 de 15"><img class="bg" src="fotos/04.jpg" alt="" decoding="async"><img class="fg" src="fotos/04.jpg" alt="Betania y Cristian, foto 4" decoding="async"></div>
-    <div class="slide" role="group" aria-roledescription="foto" aria-label="Foto 5 de 15"><img class="bg" src="fotos/05.jpg" alt="" decoding="async"><img class="fg" src="fotos/05.jpg" alt="Betania y Cristian, foto 5" decoding="async"></div>
-    <div class="slide" role="group" aria-roledescription="foto" aria-label="Foto 6 de 15"><img class="bg" src="fotos/06.jpg" alt="" decoding="async"><img class="fg" src="fotos/06.jpg" alt="Betania y Cristian, foto 6" decoding="async"></div>
-    <div class="slide" role="group" aria-roledescription="foto" aria-label="Foto 7 de 15"><img class="bg" src="fotos/07.jpg" alt="" decoding="async"><img class="fg" src="fotos/07.jpg" alt="Betania y Cristian, foto 7" decoding="async"></div>
-    <div class="slide" role="group" aria-roledescription="foto" aria-label="Foto 8 de 15"><img class="bg" src="fotos/08.jpg" alt="" decoding="async"><img class="fg" src="fotos/08.jpg" alt="Betania y Cristian, foto 8" decoding="async"></div>
-    <div class="slide" role="group" aria-roledescription="foto" aria-label="Foto 9 de 15"><img class="bg" src="fotos/09.jpg" alt="" decoding="async"><img class="fg" src="fotos/09.jpg" alt="Betania y Cristian, foto 9" decoding="async"></div>
-    <div class="slide" role="group" aria-roledescription="foto" aria-label="Foto 10 de 15"><img class="bg" src="fotos/10.jpg" alt="" decoding="async"><img class="fg" src="fotos/10.jpg" alt="Betania y Cristian, foto 10" decoding="async"></div>
-    <div class="slide" role="group" aria-roledescription="foto" aria-label="Foto 11 de 15"><img class="bg" src="fotos/11.jpg" alt="" decoding="async"><img class="fg" src="fotos/11.jpg" alt="Betania y Cristian, foto 11" decoding="async"></div>
-    <div class="slide" role="group" aria-roledescription="foto" aria-label="Foto 12 de 15"><img class="bg" src="fotos/12.jpg" alt="" decoding="async"><img class="fg" src="fotos/12.jpg" alt="Betania y Cristian, foto 12" decoding="async"></div>
-    <div class="slide" role="group" aria-roledescription="foto" aria-label="Foto 13 de 15"><img class="bg" src="fotos/13.jpg" alt="" decoding="async"><img class="fg" src="fotos/13.jpg" alt="Betania y Cristian, foto 13" decoding="async"></div>
-    <div class="slide" role="group" aria-roledescription="foto" aria-label="Foto 14 de 15"><img class="bg" src="fotos/14.jpg" alt="" decoding="async"><img class="fg" src="fotos/14.jpg" alt="Betania y Cristian, foto 14" decoding="async"></div>
-    <div class="slide" role="group" aria-roledescription="foto" aria-label="Foto 15 de 15"><img class="bg" src="fotos/15.jpg" alt="" decoding="async"><img class="fg" src="fotos/15.jpg" alt="Betania y Cristian, foto 15" decoding="async"></div>
-    </div>
-    <div class="dots" id="dots" hidden></div>
+    <div class="mini" role="region" aria-label="Fotos de Betania y Cristian">
+      <div class="cell"><img class="bg" alt=""><img class="fg" alt="Betania y Cristian"></div>
+      <div class="cell"><img class="bg" alt=""><img class="fg" alt="Betania y Cristian"></div>
+      <div class="cell"><img class="bg" alt=""><img class="fg" alt="Betania y Cristian"></div>
     </div>
     <div class="labels" aria-hidden="true"><span>Días</span><span>Horas</span><span>Minutos</span><span>Segundos</span></div>
   </div>
@@ -246,46 +197,32 @@
   tick();
   timer = setInterval(tick, 1000);
 
-  // Carrusel
+  // Tres fotos que van cambiando de a una, al azar y sin repetir las que están a la vista
   (() => {
-    const track = document.getElementById('track');
-    const slides = [...track.children];
-    const dots = document.getElementById('dots');
+    const fotos = Array.from({ length: 15 }, (_, i) => 'fotos/' + String(i + 1).padStart(2, '0') + '.jpg');
+    fotos.forEach(src => { const im = new Image(); im.src = src; });
+    const cells = [...document.querySelectorAll('.mini .cell')];
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let idx = 0, auto;
-    slides.forEach((_, i) => {
-      const b = document.createElement('button');
-      b.type = 'button'; b.setAttribute('aria-label', 'Ver foto ' + (i + 1));
-      b.addEventListener('click', () => { go(i); restart(); });
-      dots.appendChild(b);
-    });
-    const mark = () => [...dots.children].forEach((b, i) => b.setAttribute('aria-current', i === idx ? 'true' : 'false'));
-    function go(i) {
-      idx = (i + slides.length) % slides.length;
-      // Fundido: se apaga, salta a la foto elegida y vuelve a aparecer
-      track.style.opacity = 0;
-      setTimeout(() => { track.scrollLeft = idx * track.clientWidth; track.style.opacity = 1; }, reduce ? 0 : 500);
-      mark();
-    }
-    let t;
-    track.addEventListener('scroll', () => {
-      clearTimeout(t);
-      t = setTimeout(() => { idx = Math.round(track.scrollLeft / track.clientWidth); mark(); }, 80);
-    }, { passive: true });
-    track.addEventListener('keydown', e => {
-      if (e.key === 'ArrowRight') { e.preventDefault(); go(idx + 1); restart(); }
-      if (e.key === 'ArrowLeft') { e.preventDefault(); go(idx - 1); restart(); }
-    });
-    // Orden aleatorio: recorre todas las fotos mezcladas antes de repetir
+    const shown = [];
     let bag = [];
-    function nextRandom() {
-      if (!bag.length) bag = slides.map((_, i) => i).filter(i => i !== idx).sort(() => Math.random() - 0.5);
-      return bag.pop();
+    function pick() {
+      if (!bag.filter(f => !shown.includes(f)).length) bag = fotos.slice().sort(() => Math.random() - 0.5);
+      const i = bag.findIndex(f => !shown.includes(f));
+      return bag.splice(i, 1)[0];
     }
-    function restart() { clearInterval(auto); auto = setInterval(() => go(nextRandom()), 4500); }
-    idx = Math.floor(Math.random() * slides.length);
-    track.scrollLeft = idx * track.clientWidth;
-    mark(); restart();
+    function put(c, src) {
+      shown[c] = src;
+      cells[c].querySelector('.bg').src = src;
+      cells[c].querySelector('.fg').src = src;
+    }
+    cells.forEach((_, c) => put(c, pick()));
+    let turn = 0;
+    setInterval(() => {
+      const c = [0, 2, 1][turn++ % 3];
+      const src = pick();
+      cells[c].classList.add('out');
+      setTimeout(() => { put(c, src); cells[c].classList.remove('out'); }, reduce ? 0 : 600);
+    }, 3000);
   })();
 </script>
 </body>
