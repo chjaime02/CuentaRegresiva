@@ -60,8 +60,8 @@
   }
   .invite > img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 
-  /* Reloj gaucho: tira de cuero con costura de hilo crudo, trenza de tiento y cuatro conchos de plata
-     (como los botones de una rastra) con los números grabados. Tapa el reloj y las etiquetas de la imagen. */
+  /* Reloj gaucho: tira de cuero con costura de hilo crudo, trenza de tiento y cuatro monedas viejas
+     de 100 pesos con los números grabados. Tapa el reloj y las etiquetas de la imagen. */
   .reloj {
     position: absolute; z-index: 1;
     left: calc(112 / 683 * 100%);
@@ -102,33 +102,46 @@
     box-shadow: 0 0.3cqw 0.5cqw rgba(30,14,4,0.6);
   }
   .unidad { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 1.4cqw; }
+  /* Moneda vieja de 100 pesos (1980): latón dorado gastado, canto estriado y leyenda alrededor */
   .concho {
     position: relative;
     width: 14cqw; aspect-ratio: 1;
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    background: radial-gradient(circle at 36% 30%, #ffffff, #dedbd2 30%, #a9a59a 62%, #77736a 88%, #5c5952);
-    box-shadow: 0 0.5cqw 0.9cqw rgba(25,12,4,0.7), inset 0 -0.4cqw 0.6cqw rgba(0,0,0,0.25);
+    background:
+      radial-gradient(circle at 72% 74%, rgba(92,64,18,0.38), transparent 38%),
+      radial-gradient(circle at 22% 70%, rgba(110,80,24,0.22), transparent 30%),
+      radial-gradient(circle at 34% 27%, #fff1bf 0%, #e8c468 20%, #c99f3e 48%, #9b7325 76%, #6c4e16 100%);
+    box-shadow: 0 0.5cqw 0.9cqw rgba(25,12,4,0.7), inset 0 -0.4cqw 0.8cqw rgba(60,40,0,0.45);
   }
-  /* Borde cincelado del concho */
+  /* Canto estriado */
   .concho::before {
-    content: ""; position: absolute; inset: 0.5cqw; border-radius: 50%;
-    background: repeating-conic-gradient(#6f6b62 0 5deg, #e9e6de 5deg 10deg);
-    -webkit-mask: radial-gradient(circle, transparent 5.2cqw, #000 5.3cqw 6.1cqw, transparent 6.2cqw);
-            mask: radial-gradient(circle, transparent 5.2cqw, #000 5.3cqw 6.1cqw, transparent 6.2cqw);
-    opacity: 0.8;
+    content: ""; position: absolute; inset: 0; border-radius: 50%;
+    background: repeating-conic-gradient(#6e5016 0 2deg, #e3c36c 2deg 4deg);
+    -webkit-mask: radial-gradient(circle, transparent 6.25cqw, #000 6.35cqw);
+            mask: radial-gradient(circle, transparent 6.25cqw, #000 6.35cqw);
   }
+  /* Borde en relieve */
   .concho::after {
-    content: ""; position: absolute; inset: 2.6cqw; border-radius: 50%;
-    border: 0.2cqw solid rgba(90,86,78,0.55);
+    content: ""; position: absolute; inset: 1.1cqw; border-radius: 50%;
+    border: 0.25cqw solid rgba(106,76,20,0.75);
+    box-shadow: 0 0.12cqw 0 rgba(255,236,170,0.6), inset 0 0.12cqw 0 rgba(255,236,170,0.5);
   }
+  .leyenda { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .leyenda text {
+    font-family: var(--display);
+    font-size: 7.4px;
+    letter-spacing: 0.4px;
+    fill: #5a3f0e;
+  }
+  .leyenda .anio { font-size: 8px; }
   .d {
     position: relative; z-index: 1;
     display: inline-block; width: 0.5em; text-align: center;
     font-family: var(--display);
-    font-size: 6.4cqw; line-height: 1;
-    color: #3a2412;
-    text-shadow: 0 0.12cqw 0 rgba(255,255,255,0.75), 0 -0.08cqw 0 rgba(0,0,0,0.35);
+    font-size: 5.8cqw; line-height: 1;
+    color: #4a3008;
+    text-shadow: 0 0.12cqw 0 rgba(255,240,190,0.85), 0 -0.08cqw 0 rgba(60,36,4,0.5);
     font-variant-numeric: tabular-nums lining-nums;
   }
   .lbl {
@@ -199,11 +212,12 @@
 <div class="wrap">
   <div class="invite" aria-label="Invitación de casamiento con cuenta regresiva: sábado 30 de enero de 2027, Salón Municipal de Sinsacate">
     <img src="invitacion.jpg?v=2" alt="">
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><path id="arco-sup" d="M 19.9,60.9 A 32,32 0 1 1 80.1,60.9"/><path id="arco-inf" d="M 13,50 A 37,37 0 0 0 87,50"/></defs></svg>
     <div class="reloj" role="timer" aria-label="Cuenta regresiva para la boda">
-      <div class="unidad"><div class="concho"><span class="d" id="d0">0</span><span class="d" id="d1">0</span></div><span class="lbl">Días</span></div>
-      <div class="unidad"><div class="concho"><span class="d" id="h0">0</span><span class="d" id="h1">0</span></div><span class="lbl">Horas</span></div>
-      <div class="unidad"><div class="concho"><span class="d" id="m0">0</span><span class="d" id="m1">0</span></div><span class="lbl">Minutos</span></div>
-      <div class="unidad"><div class="concho"><span class="d" id="s0">0</span><span class="d" id="s1">0</span></div><span class="lbl">Segundos</span></div>
+      <div class="unidad"><div class="concho"><svg class="leyenda" viewBox="0 0 100 100" aria-hidden="true"><text text-anchor="middle"><textPath href="#arco-sup" startOffset="50%">REPÚBLICA ARGENTINA</textPath></text><text class="anio" text-anchor="middle"><textPath href="#arco-inf" startOffset="50%">· 1980 ·</textPath></text></svg><span class="d" id="d0">0</span><span class="d" id="d1">0</span></div><span class="lbl">Días</span></div>
+      <div class="unidad"><div class="concho"><svg class="leyenda" viewBox="0 0 100 100" aria-hidden="true"><text text-anchor="middle"><textPath href="#arco-sup" startOffset="50%">REPÚBLICA ARGENTINA</textPath></text><text class="anio" text-anchor="middle"><textPath href="#arco-inf" startOffset="50%">· 1980 ·</textPath></text></svg><span class="d" id="h0">0</span><span class="d" id="h1">0</span></div><span class="lbl">Horas</span></div>
+      <div class="unidad"><div class="concho"><svg class="leyenda" viewBox="0 0 100 100" aria-hidden="true"><text text-anchor="middle"><textPath href="#arco-sup" startOffset="50%">REPÚBLICA ARGENTINA</textPath></text><text class="anio" text-anchor="middle"><textPath href="#arco-inf" startOffset="50%">· 1980 ·</textPath></text></svg><span class="d" id="m0">0</span><span class="d" id="m1">0</span></div><span class="lbl">Minutos</span></div>
+      <div class="unidad"><div class="concho"><svg class="leyenda" viewBox="0 0 100 100" aria-hidden="true"><text text-anchor="middle"><textPath href="#arco-sup" startOffset="50%">REPÚBLICA ARGENTINA</textPath></text><text class="anio" text-anchor="middle"><textPath href="#arco-inf" startOffset="50%">· 1980 ·</textPath></text></svg><span class="d" id="s0">0</span><span class="d" id="s1">0</span></div><span class="lbl">Segundos</span></div>
     </div>
     <div class="mini" role="region" aria-label="Fotos de Betania y Cristian">
       <div class="cell"><img class="bg" alt=""><img class="fg" alt="Betania y Cristian"></div>
