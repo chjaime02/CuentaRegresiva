@@ -182,24 +182,33 @@
   /* Mensaje dentro de la ilustración, entre la bailarina y la guitarra */
   .note {
     position: absolute; z-index: 2;
-    left: calc(296 / 683 * 100%);
-    width: calc(240 / 683 * 100%);
-    top: calc(642 / 1024 * 100%);
-    height: calc(266 / 1024 * 100%);
-    display: flex; flex-direction: column; justify-content: center; gap: 1cqw;
+    left: calc(225 / 683 * 100%);
+    width: calc(333 / 683 * 100%);
+    top: calc(612 / 1024 * 100%);
+    height: calc(323 / 1024 * 100%);
     text-align: center;
+  }
+  /* El texto rodea los dibujos: la bailarina a la izquierda, las flores, la guitarra y el mate a la derecha */
+  .note .rodeo { height: 100%; }
+  .note .izq {
+    float: left; width: 25%;
+    shape-outside: polygon(0 0, 4% 0, 4% 27%, 48% 27%, 48% 33%, 93% 33%, 93% 100%, 0 100%);
+  }
+  .note .der {
+    float: right; width: 20%;
+    shape-outside: polygon(100% 0, 100% 33%, 73% 33%, 73% 70%, 28% 70%, 28% 100%, 100% 100%);
   }
   .note p {
     margin: 0;
     font-family: var(--body);
     font-style: italic;
-    font-size: 2.9cqw;
-    line-height: 1.32;
+    font-size: calc(4.06cqw * var(--k, 1)); /* 40% más grande que antes (2.9cqw) */
+    line-height: 1.2;
     color: #2e2116;
     text-shadow: 0 0 0.6cqw #f3e3d0, 0 0 1.2cqw #f3e3d0;
     text-wrap: pretty;
   }
-  .note .arrived { font-style: normal; font-family: var(--display); font-size: 3.4cqw; }
+  .note .arrived { font-style: normal; font-family: var(--display); font-size: calc(4.76cqw * var(--k, 1)); }
   [hidden] { display: none !important; }
 </style>
 </head>
@@ -222,6 +231,7 @@
       <div class="cell"><img class="bg" alt=""><img class="fg" alt="Betania y Cristian"></div>
     </div>
     <div class="note">
+      <div class="rodeo izq" aria-hidden="true"></div><div class="rodeo der" aria-hidden="true"></div>
       <p>"Este reloj te va diciendo cuánto falta para Nuestra Boda, y la posibilidad de juntarnos a disfrutar y celebrar la Vida, la Amistad y el Amor!!! Esperamos contar con tu presencia, para que puedas compartir con nosotros de esa hermosa noche."</p>
       <p class="arrived" id="arrived" hidden>¡Llegó el gran día!</p>
     </div>
@@ -256,6 +266,22 @@
     const go = el.requestFullscreen || el.webkitRequestFullscreen;
     if (go) Promise.resolve(go.call(el, { navigationUI: 'hide' })).catch(() => {});
   });
+
+  // El mensaje va con letra 40% más grande; si en alguna pantalla no entra en su lugar sin pisar
+  // los dibujos, se achica lo justo
+  function ajustarMensaje() {
+    const note = document.querySelector('.note');
+    const ultimo = () => [...note.querySelectorAll('p')].filter(p => !p.hidden).pop();
+    let k = 1;
+    note.style.setProperty('--k', k);
+    while (k > 0.7 && ultimo().getBoundingClientRect().bottom > note.getBoundingClientRect().bottom + 0.5) {
+      k -= 0.02;
+      note.style.setProperty('--k', k);
+    }
+  }
+  ajustarMensaje();
+  if (document.fonts) document.fonts.ready.then(ajustarMensaje);
+  addEventListener('resize', ajustarMensaje);
 
   // Tres fotos que van cambiando de a una, al azar y sin repetir las que están a la vista
   (() => {
