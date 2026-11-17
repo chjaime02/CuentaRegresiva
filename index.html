@@ -202,13 +202,13 @@
     margin: 0;
     font-family: var(--body);
     font-style: italic;
-    font-size: calc(4.06cqw * var(--k, 1)); /* 40% más grande que antes (2.9cqw) */
+    font-size: calc(3.77cqw * var(--k, 1)); /* 30% más grande que antes (2.9cqw) */
     line-height: 1.2;
     color: #2e2116;
     text-shadow: 0 0 0.6cqw #f3e3d0, 0 0 1.2cqw #f3e3d0;
     text-wrap: pretty;
   }
-  .note .arrived { font-style: normal; font-family: var(--display); font-size: calc(4.76cqw * var(--k, 1)); }
+  .note .arrived { font-style: normal; font-family: var(--display); font-size: calc(4.42cqw * var(--k, 1)); }
   [hidden] { display: none !important; }
 </style>
 </head>
@@ -267,7 +267,7 @@
     if (go) Promise.resolve(go.call(el, { navigationUI: 'hide' })).catch(() => {});
   });
 
-  // El mensaje va con letra 40% más grande; si en alguna pantalla no entra en su lugar sin pisar
+  // El mensaje va con letra 30% más grande; si en alguna pantalla no entra en su lugar sin pisar
   // los dibujos, se achica lo justo
   function ajustarMensaje() {
     const note = document.querySelector('.note');
