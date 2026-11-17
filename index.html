@@ -248,6 +248,15 @@
   tick();
   timer = setInterval(tick, 1000);
 
+  // Al tocar la pantalla se pasa a pantalla completa y se esconde la barra del navegador
+  // (Android; en iPhone Safari no lo permite y no pasa nada)
+  document.addEventListener('click', () => {
+    const el = document.documentElement;
+    if (document.fullscreenElement || document.webkitFullscreenElement) return;
+    const go = el.requestFullscreen || el.webkitRequestFullscreen;
+    if (go) Promise.resolve(go.call(el, { navigationUI: 'hide' })).catch(() => {});
+  });
+
   // Tres fotos que van cambiando de a una, al azar y sin repetir las que están a la vista
   (() => {
     const TOTAL_FOTOS = 92;
